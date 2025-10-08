@@ -1,12 +1,17 @@
-name: Auto Deploy Site    # Only ONE name
+name: Auto Deploy to GitHub Pages
 
-on:                       # Only ONE on
+on:
   push:
-    branches: [main]
+    branches:
+      - main  # run this workflow when code is pushed to main branch
 
-jobs:                     # Only ONE jobs
+permissions:
+  contents: write  # required to push to gh-pages branch
+
+jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -15,6 +20,5 @@ jobs:                     # Only ONE jobs
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          destination_branch: gh-pages
+          publish_dir: ./  # path to your index.html
 
