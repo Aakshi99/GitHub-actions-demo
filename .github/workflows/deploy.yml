@@ -1,40 +1,20 @@
-name: Auto Deploy Site
+name: Auto Deploy Site    # Only ONE name
 
-# Trigger workflow on push to main branch
-on:
+on:                       # Only ONE on
   push:
     branches: [main]
 
-jobs:
+jobs:                     # Only ONE jobs
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout your repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Built-in token
-          publish_dir: ./  # Directory containing your index.html
-          destination_branch: gh-pages  # Branch where site will be published
-name: Auto Deploy Site
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+          destination_branch: gh-pages
 
